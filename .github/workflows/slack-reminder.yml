@@ -1,0 +1,21 @@
+name: Slack Reminder Bot
+
+on:
+  schedule:
+    - cron: '0 17 * * 1-5' # Every weekday at 5pm UTC (adjust as needed)
+  workflow_dispatch: # Allows manual runs too
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - name: Run reminder script
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: node reminder.js
