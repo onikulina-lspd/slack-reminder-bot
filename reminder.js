@@ -29,7 +29,9 @@ const message = messages[Math.floor(Math.random() * messages.length)];
 
 try {
   await axios.post(webhookUrl, {
-    text: `Hey team, today's benign threat is: ${message}`
+    text: `Hey team, today's benign threat is: ${message}`,
+    username: "Benign Threat Bot",
+    icon_url: "https://i.imgur.com/XEyEkxa.png"
   });
   console.log("Reminder sent!");
 } catch (err) {
