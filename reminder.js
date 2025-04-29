@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from 'axios';
 
 const webhookUrl = process.env.SLACK_WEBHOOK;
 
@@ -17,6 +17,9 @@ const messages = [
 
 const message = messages[Math.floor(Math.random() * messages.length)];
 
-axios.post(webhookUrl, { text: message })
-  .then(() => console.log("Reminder sent!"))
-  .catch((err) => console.error("Error sending message", err));
+try {
+  await axios.post(webhookUrl, { text: message });
+  console.log("Reminder sent!");
+} catch (err) {
+  console.error("Error sending message", err);
+}
