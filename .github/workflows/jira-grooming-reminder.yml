@@ -1,0 +1,28 @@
+name: Jira Grooming Reminder
+
+on:
+  schedule:
+    - cron: '0 15 * * 4' # Every Thursday at 8am PST (15:00 UTC)
+  workflow_dispatch:
+
+jobs:
+  send-jira-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - run: npm install
+
+      - name: Run Jira reminder script
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_PROJECT: ${{ secrets.JIRA_PROJECT }}
+          JIRA_DOMAIN: ${{ secrets.JIRA_DOMAIN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: node jira-to-slack.js
