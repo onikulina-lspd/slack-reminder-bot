@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 const {
   JIRA_EMAIL,
   JIRA_API_TOKEN,
-  SLACK_WEBHOOK_URL,
+  SLACK_WEBHOOK,
   JIRA_PROJECT,
   JIRA_DOMAIN,
 } = process.env;
@@ -11,7 +11,7 @@ const {
 if (
   !JIRA_EMAIL ||
   !JIRA_API_TOKEN ||
-  !SLACK_WEBHOOK_URL ||
+  !SLACK_WEBHOOK ||
   !JIRA_PROJECT ||
   !JIRA_DOMAIN
 ) {
@@ -67,7 +67,7 @@ async function sendToSlack(issues) {
     ],
   };
 
-  const slackRes = await fetch(SLACK_WEBHOOK_URL, {
+  const slackRes = await fetch(SLACK_WEBHOOK, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message),
