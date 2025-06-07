@@ -10,13 +10,6 @@ if (
   !JIRA_PROJECT ||
   !JIRA_DOMAIN
 ) {
-  console.log(
-    JIRA_EMAIL,
-    JIRA_API_TOKEN,
-    SLACK_WEBHOOK,
-    JIRA_PROJECT,
-    JIRA_DOMAIN
-  );
   throw new Error("Missing required environment variables.");
 }
 
