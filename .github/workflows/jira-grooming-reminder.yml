@@ -22,7 +22,6 @@ jobs:
         env:
           JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_PROJECT: ${{ secrets.JIRA_PROJECT }}
           JIRA_DOMAIN: ${{ secrets.JIRA_DOMAIN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         run: node jira-to-slack.js
