@@ -1,12 +1,7 @@
 import fetch from "node-fetch";
 
-const {
-  JIRA_EMAIL,
-  JIRA_API_TOKEN,
-  SLACK_WEBHOOK,
-  JIRA_PROJECT,
-  JIRA_DOMAIN,
-} = process.env;
+const { JIRA_EMAIL, JIRA_API_TOKEN, SLACK_WEBHOOK, JIRA_PROJECT, JIRA_DOMAIN } =
+  process.env;
 
 if (
   !JIRA_EMAIL ||
@@ -15,6 +10,13 @@ if (
   !JIRA_PROJECT ||
   !JIRA_DOMAIN
 ) {
+  console.log(
+    JIRA_EMAIL,
+    JIRA_API_TOKEN,
+    SLACK_WEBHOOK,
+    JIRA_PROJECT,
+    JIRA_DOMAIN
+  );
   throw new Error("Missing required environment variables.");
 }
 
