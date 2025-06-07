@@ -14,7 +14,7 @@ if (
 }
 
 async function fetchReadyForGroomingIssues() {
-  const jql = `created >= -30d AND project = NU AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
+  const jql = `created >= -30d AND project = "NU" AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
   const url = `https://${JIRA_DOMAIN}/rest/api/3/search?jql=${encodeURIComponent(
     jql
   )}&maxResults=10`;
