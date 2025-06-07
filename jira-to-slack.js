@@ -13,14 +13,12 @@ if (
   throw new Error("Missing required environment variables.");
 }
 
-// created >= -30d AND project = NU AND sprint = 2089 ORDER BY created DESC
-
 async function fetchReadyForGroomingIssues() {
-  const jql = `created >= -30d AND project = NU AND sprint = 2089 AND status != Closed ORDER BY Rank`;
+  const jql = `created >= -30d AND project = NU AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
   const url = `https://${JIRA_DOMAIN}/rest/api/3/search?jql=${encodeURIComponent(
     jql
   )}&maxResults=10`;
-
+  console.log(url);
   const response = await fetch(url, {
     headers: {
       Authorization: `Basic ${Buffer.from(
