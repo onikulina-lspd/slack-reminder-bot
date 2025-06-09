@@ -11,7 +11,6 @@ async function fetchReadyForGroomingIssues() {
   const url = `https://nuorder-inc.atlassian.net/rest/api/3/search?jql=${encodeURIComponent(
     jql
   )}&maxResults=10`;
-  console.log(url);
   const response = await fetch(url, {
     headers: {
       Authorization: `Basic ${Buffer.from(
