@@ -7,8 +7,7 @@ if (!JIRA_EMAIL || !JIRA_API_TOKEN || !SLACK_WEBHOOK) {
 }
 
 async function fetchReadyForGroomingIssues() {
-  //   const jql = `created >= -30d AND project = "NU" AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
-  const jql = `project = "NU" ORDER BY created DESC`;
+  const jql = `created >= -30d AND project = "NU" AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
   const url = `https://nuorder-inc.atlassian.net/rest/api/3/search?jql=${encodeURIComponent(
     jql
   )}&maxResults=10`;
@@ -66,31 +65,8 @@ async function sendToSlack(issues) {
   }
 }
 
-async function testJiraAuth() {
-  const url = `https://nuorder-inc.atlassian.net/rest/api/3/myself`;
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${JIRA_EMAIL}:${JIRA_API_TOKEN}`
-      ).toString("base64")}`,
-      Accept: "application/json",
-    },
-  });
-
-  const result = await response.text();
-  console.log("🔐 Auth test result:", result);
-}
-
 async function main() {
-  console.log(
-    `Encoded Auth Header: Basic ${Buffer.from(
-      `${JIRA_EMAIL}:${JIRA_API_TOKEN}`
-    ).toString("base64")}`
-  );
-  console.log(`Email length: ${JIRA_EMAIL.length}`);
-  console.log(`Token length: ${JIRA_API_TOKEN.length}`);
   try {
-    await testJiraAuth();
     const issues = await fetchReadyForGroomingIssues();
     if (issues.length === 0) {
       console.log("No issues found.");
