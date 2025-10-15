@@ -7,7 +7,7 @@ if (!JIRA_EMAIL || !JIRA_API_TOKEN || !SLACK_WEBHOOK) {
 }
 
 async function fetchReadyForGroomingIssues() {
-  const jql = `created >= -30d AND project = "NU" AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
+  const jql = `project = "NU" AND cf[10021] = 2089 AND status != Closed ORDER BY cf[11321]`;
   const url = `https://nuorder-inc.atlassian.net/rest/api/3/search/jql?jql=${encodeURIComponent(
     jql
   )}&fields=*all&maxResults=10`;
